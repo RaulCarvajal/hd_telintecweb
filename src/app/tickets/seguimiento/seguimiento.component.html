@@ -1,0 +1,92 @@
+<div class="card">
+
+    <div class="card-header">Ticket {{this.ticketId}}</div>
+
+    <div class="card-body">
+        <form [formGroup]="altaForm" (ngSubmit)="onSubmit()" class="form-horizontal ng-invalid ng-touched ng-dirty"
+            novalidate>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="NombreReporta">Reporta</label>
+                <div class="col-sm-9">
+                    <input aria-describedby="NombreReporta" class="form-control" id="NombreReporta" readonly
+                        formControlName="NombreReporta" placeholder="Ingrese nombre" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="NombreReporta">Tipo Reporte</label>
+                <div class="col-sm-4">
+                    <input aria-describedby="TipoReporte" class="form-control" id="TipoReporte" readonly
+                        formControlName="TipoReporte" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="ComentarioAlta">Comentario</label>
+                <div class="col-sm-9">
+                    <textarea aria-describedby="ComentarioAlta" class="form-control" id="ComentarioAlta" readonly
+                        formControlName="ComentarioAlta" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="Fecha Alta">Fecha Alta</label>
+                <div class="col-sm-4">
+                    <input aria-describedby="FechaAlta" class="form-control" id="FechaAlta" readonly
+                        formControlName="FechaAlta" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="AsignadoA">Asignado A</label>
+                <div class="col-sm-9">
+                    <input aria-describedby="AsignadoA" class="form-control" id="AsignadoA" readonly
+                        formControlName="AsignadoA" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="FechaAsignadio">Fecha Asignación</label>
+                <div class="col-sm-4">
+                    <input aria-describedby="FechaAsignadio" class="form-control" id="FechaAsignadio" readonly
+                        formControlName="FechaAsignadio" type="text">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label" for="ComentarioAsignado">Comentario Soporte</label>
+                <div class="col-sm-9">
+                    <textarea aria-describedby="ComentarioAsignado" class="form-control" id="ComentarioAsignado"
+                        [readonly]="this.estadoTicket == 3 || !this.isHelpDesk"
+                        autofocus formControlName="ComentarioAsignado" rows="5"></textarea>
+                    <div *ngIf="altaForm.controls['ComentarioAsignado'].invalid && (altaForm.controls['ComentarioAsignado'].dirty || altaForm.controls['ComentarioAsignado'].touched)"
+                        class="invalid-feedback ng-star-inserted">
+                        <div *ngIf="altaForm.controls['ComentarioAsignado'].errors.required && this.isHelpDesk">
+                            El comentario de soporte es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="this._image">
+              <label for="Imagen" class="col-sm-2 col-form-label">Imagen</label>
+              <div class="col-sm-6">
+                <div class="text-center">
+                  <img [src]="this._image" class="rounded img-fluid" >
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group row" *ngIf=" this.estadoTicket == 2 && this.isHelpDesk">
+                <div class="offset-sm-2 col-sm-10">
+                    <input class=" col-form-label mr-2" type="checkbox" id="CerrarTicket"
+                        formControlName="CerrarTicket">
+                    <label class=" col-form-label" for="CerrarTicket">Cerrar Ticket</label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button class="btn btn-danger mr-1" (click)="Cancelar();" type="button">Cancelar</button>
+                    <button class="btn btn-success" type="submit" *ngIf=" this.estadoTicket == 2 && this.isHelpDesk"
+                        [disabled]="altaForm.pristine || altaForm.invalid">Guardar</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

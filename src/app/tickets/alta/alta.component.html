@@ -1,0 +1,100 @@
+<div class="card">
+
+  <div class="card-header">Alta de Ticket</div>
+
+  <div class="card-body">
+    <form [formGroup]="altaForm" (ngSubmit)="onSubmit()" class="form-horizontal ng-invalid ng-touched ng-dirty"
+      novalidate>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="NombreReporta">Reporta</label>
+        <div class="col-sm-9">
+          <input aria-describedby="NombreReporta" class="form-control" id="NombreReporta" autofocus
+            formControlName="NombreReporta" placeholder="Ingrese nombre" type="text">
+
+          <div
+            *ngIf="altaForm.controls['NombreReporta'].invalid && (altaForm.controls['NombreReporta'].dirty || altaForm.controls['NombreReporta'].touched)"
+            class="invalid-feedback ng-star-inserted">
+            <div *ngIf="altaForm.controls['NombreReporta'].errors.required">
+              Nombre quien reporta es requerido.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="PlantaId" class="col-sm-2 col-form-label">Planta</label>
+        <div class="col-sm-6">
+          <select class="form-control" formControlName="PlantaId" id="PlantaId">
+            <option *ngFor="let planta of plantas" value="{{planta.plantaId}}">{{planta.plantaNombre}}</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="TipoReporte" class="col-sm-2 col-form-label">Tipo Reporte</label>
+
+        <div class="col-sm-6">
+          <select class="form-control" formControlName="TipoReporte" id="TipoReporte">
+            <option value="1">Error en Sistema</option>
+            <option value="2">Falla en Equipo</option>
+            <option value="3">Mantenimiento</option>
+            <option value="4">Otro</option>
+          </select>
+        </div>
+
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="descripcion" class="col-sm-2 col-form-label">Descripción</label>
+
+        <div class="col-sm-9">
+          <textarea class="form-control" id="ComentarioAlta" formControlName="ComentarioAlta" rows="5"></textarea>
+          <div
+            *ngIf="altaForm.controls['ComentarioAlta'].invalid && (altaForm.controls['ComentarioAlta'].dirty || altaForm.controls['ComentarioAlta'].touched)"
+            class="invalid-feedback ng-star-inserted">
+            <div *ngIf="altaForm.controls['ComentarioAlta'].errors.required">
+              La descripción es requerida
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+       <label for="Imagen" class="col-sm-2 col-form-label">Imagen :</label>
+        <div class="col-sm-6 ">
+          <input type="file"  accept="image/*" style="display:none" #fileInput (change)="onFileClientSelected($event)">
+          <input aria-describedby="Imagen" formControlName="Imagen" readonly class="form-control" id="Imagen" type="text" />
+
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary mr-1" (click)="fileInput.click()" *ngIf="!this.eliminar" type="button">Imagen</button>
+          <button class="btn btn-primary mr-1" (click)="eliminarImagen(); this._image = null;" *ngIf="this.eliminar" type="button">Eliminar</button>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="Imagen" class="col-sm-2 col-form-label">&nbsp;</label>
+        <div class="col-sm-6">
+          <div class="text-center">
+            <img [src]="this._image" class="rounded img-fluid" >
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <div class="offset-sm-2 col-sm-10">
+          <button class="btn btn-danger mr-1" (click)="cancelTicket()" type="button">Cancelar</button>
+          <button class="btn btn-success" type="submit"
+            [disabled]="altaForm.pristine || altaForm.invalid">Guardar</button>
+        </div>
+      </div>
+
+
+
+    </form>
+  </div>
+</div>
