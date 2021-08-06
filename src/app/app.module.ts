@@ -27,6 +27,9 @@ import { RouterModule } from "@angular/router";
 import { SidebarModule } from "ng-sidebar";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { ToastrModule } from 'ngx-toastr';
+import { KpisComponent } from './kpis/kpis.component';
+
+import { ChartsModule } from 'ng2-charts';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -58,7 +61,8 @@ const DEFAULT_GLOBAL_VALIDATION_MESSAGES = {
     AuthLayoutComponent,
     AccordionAnchorDirective,
     AccordionLinkDirective,
-    AccordionDirective
+    AccordionDirective,
+    KpisComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +88,7 @@ const DEFAULT_GLOBAL_VALIDATION_MESSAGES = {
       validateOn: "blur"
     }),    
     ToastrModule.forRoot(),
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

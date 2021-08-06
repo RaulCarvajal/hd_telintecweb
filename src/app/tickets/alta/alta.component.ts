@@ -28,13 +28,15 @@ export class AltaComponent implements OnInit {
   public _image: any;
   public archivo: Archivo;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private ticketService: TicketService,
     private route: ActivatedRoute,
     private router: Router,
     private toastr: ToastrService,
     private imageService: ImageService,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer
+  ) {
     this.altaTicket = new TicketAlta();
     this.createForm();
   }

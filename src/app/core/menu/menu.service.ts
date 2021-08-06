@@ -54,6 +54,12 @@ const MENUITEMSUSER = [
     name: "Alta Ticket",
     type: "link",
     icon: "basic-archive",
+  },
+  {
+    state: "dashboard",
+    name: "KPI's Dashboard",
+    type: "link",
+    icon: "basic-folder",
   }
 ];
 

@@ -1,0 +1,178 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center">
+            <div class="card">
+                <p class="lead mt-2">
+                    Telintec HD KPI's
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <p class="ml-3 display-4">
+                    {{activos}}
+                </p>
+                <p class="ml-3">
+                    Activos
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <p class="ml-3 display-4">
+                    {{enProgreso}}
+                </p>
+                <p class="ml-3">
+                    En progreso
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <p class="ml-3 display-4">
+                    {{terminados}}
+                </p>
+                <p class="ml-3">
+                    Terminados
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="planta_incidencia.length>0">
+        <div class="col">
+            <div class="card">
+                <div class="row">
+                    <div class="col">
+                        <p class="display-4 ml-3">
+                            {{planta_incidencia[0].planta}}
+                        </p>
+                        <p class="ml-3">
+                            Con un total de {{planta_incidencia[0].incidencias}} incidencias, es la planta con más fallos. 
+                        </p>
+                    </div>
+                    <div class="col">
+                        <p class="ml-3">
+                            Seguida por:
+                        </p>
+                        <ol start="2">
+                            <li>{{planta_incidencia[1].planta}}, {{planta_incidencia[1].incidencias}} incidencias</li>
+                            <li>{{planta_incidencia[2].planta}}, {{planta_incidencia[2].incidencias}} incidencias</li>
+                            <li>{{planta_incidencia[3].planta}}, {{planta_incidencia[3].incidencias}} incidencias</li>
+                            <li>{{planta_incidencia[4].planta}}, {{planta_incidencia[4].incidencias}} incidencias</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="card">
+                <p class="lead mt-2">
+                    Tipos de fallas y estadisticas.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center" *ngIf="tr_incidencias.length==4">
+        <div class="col card card-body">
+            <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="pieChartOptions"
+                [colors]="pieChartColors"
+                [legend]="pieChartLegend">
+            </canvas>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <p class="ml-3 display-4">
+                            {{tr_incidencias[0].incidencias}}
+                        </p>
+                        <p class="ml-3">
+                            {{tr_incidencias[0].tipo}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <p class="ml-3 display-4">
+                            {{tr_incidencias[1].incidencias}}
+                        </p>
+                        <p class="ml-3">
+                            {{tr_incidencias[1].tipo}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <p class="ml-3 display-4">
+                            {{tr_incidencias[2].incidencias}}
+                        </p>
+                        <p class="ml-3">
+                            {{tr_incidencias[2].tipo}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <p class="ml-3 display-4">
+                            {{tr_incidencias[3].incidencias}}
+                        </p>
+                        <p class="ml-3">
+                            {{tr_incidencias[3].tipo}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <div class="card">
+                <p class="lead mt-2">
+                    Tiempo de respuesta.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <p class="lead ml-3 mt-2">
+                    <b>{{trpromedio}}</b>
+                </p>
+                <p class="ml-3">
+                    Promedio
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <p class="lead ml-3 mt-2">
+                    <b>{{trmayor}}</b>
+                </p>
+                <p class="ml-3">
+                    Mayor
+                </p>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <p class="lead ml-3 mt-2">
+                    <b>{{trmenor}}</b>
+                </p>
+                <p class="ml-3">
+                    Menor
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

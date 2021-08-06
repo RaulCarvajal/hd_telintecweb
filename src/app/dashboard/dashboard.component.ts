@@ -46,7 +46,6 @@ export class DashboardComponent implements OnDestroy, OnInit {
 
     this.ticketService.getTikcets().subscribe(tickets => {
       this.tickets = tickets;
-
       const activos = this.tickets.filter(t => t.estadoTicket == 1);
       const enProgreso = this.tickets.filter(t => t.estadoTicket == 2);
       const terminados = this.tickets.filter(t => t.estadoTicket == 3);
@@ -166,6 +165,19 @@ export class DashboardComponent implements OnDestroy, OnInit {
       default:
         return "Otro";
     }
+  }
+
+  actionDbl(estadoTicket:number,id_ticket){
+    console.log(estadoTicket,id_ticket);
+    if(estadoTicket==1){
+      this.editarTicket(id_ticket)
+    }else if(estadoTicket == 2 || estadoTicket == 3 ){
+      this.redireccionarATicket(id_ticket);
+    }
+  }
+
+  delClick(ticket_id:number){
+    
   }
 
 }

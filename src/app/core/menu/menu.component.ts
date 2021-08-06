@@ -94,7 +94,7 @@ import { TranslateService } from "@ngx-translate/core";
   providers: [MenuService]
 })
 export class MenuComponent {
-  currentLang = "en";
+  currentLang = "es";
 
   constructor(
     public menuService: MenuService,

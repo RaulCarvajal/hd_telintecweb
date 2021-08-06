@@ -1,0 +1,14 @@
+.showOnSm {
+    display: none;
+}
+.hideOnSm {
+    display: block;
+}
+@media only screen and (max-width: 768px) {
+    .showOnSm {
+        display: block;
+    }
+    .hideOnSm {
+        display: none;
+    }
+}

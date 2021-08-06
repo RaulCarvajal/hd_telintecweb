@@ -1,6 +1,7 @@
 import { AdminLayoutComponent } from "./core";
 import { AuthLayoutComponent } from "./core";
 import { Routes } from "@angular/router";
+import { KpisComponent } from "./kpis/kpis.component";
 
 export const AppRoutes: Routes = [
   {
@@ -23,6 +24,10 @@ export const AppRoutes: Routes = [
             m => m.TicketsModule
           )
       },
+      {
+        path : "dashboard",
+        component : KpisComponent
+      }
     ]
   },
   {

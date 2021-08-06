@@ -1,0 +1,20 @@
+<td >
+<span class="badge badge-success mr-1"
+style="cursor: pointer;"
+(click)="editarTicket(  ticket.ticketId )"
+*ngIf="ticket.estadoTicket == 1 ">
+Editar
+</span>
+<span class="badge badge-info"
+style="cursor: pointer;"
+(click)="redireccionarATicket(ticket.ticketId )"
+*ngIf="ticket.estadoTicket == 2 || ticket.estadoTicket == 3 ">
+Info
+</span>
+<span class="badge badge-secondary"
+style="cursor: pointer;"
+(click)="open(content, ticket.ticketId )"
+*ngIf="ticket.estadoTicket == 1 && this.isHelpDesk ">
+Asignar
+</span>
+</td>

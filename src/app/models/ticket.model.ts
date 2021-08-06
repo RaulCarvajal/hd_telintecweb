@@ -1,5 +1,6 @@
 export interface ITicket {
     ticketId: number,
+    plantaId: number,
     tipoReporte : number,
     estadoTicket: number,
     nombreReporta: string,

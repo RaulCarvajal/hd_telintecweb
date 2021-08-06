@@ -31,68 +31,56 @@
     </div>
 </div>
 <div class="card">
-
-    <div class="card-body">
+  
+    <div class="card-body hideOnSm">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-            <thead>
-              <tr>
-                <th># Ticket</th>
-                <th>Planta </th>
-                <th>Usuario</th>
-                <th>Fecha Alta</th>
-                <th>Estado</th>
-                <th>Tipo </th>
-                <th>Asignado </th>
-                <th>Fecha Asignación - -  </th>
-                <th>Fecha Termino </th>
-                <th >Acciones </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let ticket of tickets">
-                <td>{{ ticket.ticketId }}</td>
-                <td>{{ ticket.planta}}</td>
-                <td>{{ ticket.nombreReporta }}</td>
-                <td>{{ ticket.fechaAlta | date: 'dd/MM/yyyy'}}</td>
-                <td>{{ ticket.estadoTicket == 1 ? 'Abierto' : (ticket.estadoTicket == 2 ? 'Asignado' : (ticket.estadoTicket == 3 ? 'Cerrado' : 'Abierto')) }}</td>
-                <td>{{ obtenerTipoReporte(ticket.tipoReporte)  }}</td>
-                <td>{{ ticket.asignadoA }}</td>
-                <td>{{ ticket.estadoTicket == 1 ? '' : ticket.fechaAsignado | date: 'dd/MM/yyyy' }}</td>
-                <td>{{ ticket.estadoTicket == 3 ?  (ticket.fechaTermino | date: 'dd/MM/yyyy' ): ''}}</td>
-                <td >
-                  <span class="badge badge-danger mr-1"
-                    style="cursor: pointer;"
-                    (click)="openEliminar(contentDelete, ticket.ticketId )"
-                    *ngIf="ticket.estadoTicket == 1 ">
-                    Eliminar
-                  </span>
-                  <span class="badge badge-success mr-1"
-                    style="cursor: pointer;"
-                    (click)="editarTicket(  ticket.ticketId )"
-                    *ngIf="ticket.estadoTicket == 1 ">
-                    Editar
-                  </span>
-                  <span class="badge badge-info"
-                    style="cursor: pointer;"
-                    (click)="redireccionarATicket(ticket.ticketId )"
-                    *ngIf="ticket.estadoTicket == 2 || ticket.estadoTicket == 3 ">
-                    Info
-                  </span>
-                  <span class="badge badge-secondary"
-                    style="cursor: pointer;"
-                    (click)="open(content, ticket.ticketId )"
-                    *ngIf="ticket.estadoTicket == 1 && this.isHelpDesk ">
-                    Asignar
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-            </table>
+          <thead>
+            <tr>
+              <th># Ticket</th>
+              <th>Planta </th>
+              <th>Usuario</th>
+              <th>Fecha Alta</th>
+              <th >Estado</th>
+              <th>Tipo </th>
+              <th>Fecha Termino </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)" (dblclick)="openEliminar(contentDelete,ticket.ticketId)">
+              <td>{{ ticket.ticketId }}</td>
+              <td>{{ ticket.planta}}</td>
+              <td>{{ ticket.nombreReporta }}</td>
+              <td>{{ ticket.fechaAlta | date: 'dd/MM/yyyy'}}</td>
+              <td>{{ ticket.estadoTicket == 1 ? 'Abierto' : (ticket.estadoTicket == 2 ? 'Asignado' : (ticket.estadoTicket == 3 ? 'Cerrado' : 'Abierto')) }}</td>
+              <td>{{ obtenerTipoReporte(ticket.tipoReporte)  }}</td>
+              <td>{{ ticket.estadoTicket == 3 ?  (ticket.fechaTermino | date: 'dd/MM/yyyy' ): ''}}</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
-
+    <div class="card-body showOnSm">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+          <thead>
+            <tr>
+              <th># Ticket</th>
+              <th>Usuario</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)" (longpress)="openEliminar(contentDelete,ticket.ticketId)">
+              <td>{{ ticket.ticketId }}</td>
+              <td>{{ ticket.nombreReporta.slice(0,7)+'...' }}</td>
+              <td>{{ ticket.fechaAlta | date: 'dd/MM'}}</td>
+              <td>{{ ticket.estadoTicket == 1 ? 'Abierto' : (ticket.estadoTicket == 2 ? 'Asignado' : (ticket.estadoTicket == 3 ? 'Cerrado' : 'Abierto')) }}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
 </div>
 
-<ng-template #content let-modal>
+  <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Assignar Responsable</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
