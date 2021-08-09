@@ -46,7 +46,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)" (dblclick)="openEliminar(contentDelete,ticket.ticketId)">
+            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)">
               <td>{{ ticket.ticketId }}</td>
               <td>{{ ticket.planta}}</td>
               <td>{{ ticket.nombreReporta }}</td>
@@ -69,7 +69,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)" (longpress)="openEliminar(contentDelete,ticket.ticketId)">
+            <tr *ngFor="let ticket of tickets" (click)="actionDbl(ticket.estadoTicket,ticket.ticketId)">
               <td>{{ ticket.ticketId }}</td>
               <td>{{ ticket.nombreReporta.slice(0,7)+'...' }}</td>
               <td>{{ ticket.fechaAlta | date: 'dd/MM'}}</td>
